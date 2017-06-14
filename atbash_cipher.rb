@@ -1,30 +1,24 @@
 class AtbashCipher
-	attr_reader :cipher
-	CONSTANT = "abcdefghijklmnopqrstuvwxyz"
+	attr_reader :constant, :cipher
+	ALPHACONST = "abcdefghijklmnopqrstuvwxyz"
 
-	def initialize(cipher)
+	def initialize(cipher, constant = nil)
 		@cipher = cipher
+		@constant = constant || ALPHACONST
 	end
 
 	def encrypt(message)
-		crack_the_code(cipher, CONSTANT, message)
+		crack_the_code(cipher, constant, message)
 	end
 
 	def decrypt(message)
-		crack_the_code(CONSTANT, cipher, message)
+		crack_the_code(constant, cipher, message)
 	end
 
 	private
 
 	def crack_the_code(master, key, message)
-		code = message.chars.map do |char|
-			if CONSTANT.include?(char)
-				master[key.index(char)]
-			else
-				char
-			end
-		end
-		code.join("")
+		message.chars.map{ |char| constant.include?(char) ? master[key.index(char)] : char }.join
 	end
 end
 

@@ -1,11 +1,11 @@
-require_relative './atbash_cipher.rb'
+require_relative 'atbash_cipher.rb'
 require "test/unit"
 
 class TestAtbashCipher < Test::Unit::TestCase
 	def test_decrypt_car
 		cipher = "zodvqukgwefbyitmrsplhacxnj"
 		message = "dzs"
-		assert_equal("car", AtbashCipher.new(cipher).decrypt(message))
+		assert_equal("car", AtbashCipher.new(cipher).decrypt(message), "Failed to decrypt message: 'car'")
 	end
 
 	def test_encrypt_car
